@@ -6,7 +6,8 @@ from .models import Produit, Categorie
 
 # Vue pour la page d'accueil
 def home(request):
-    return render(request, 'Catalogue/home.html')
+    return render(request, 'home.html')
+
 
 
 #  methode pour afficher la liste des produits
@@ -48,10 +49,17 @@ def ajouter_categorie(request):
     if request.method == "POST":
         form = CategorieForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('liste_categories')
+            nom_categorie = form.cleaned_data['nom']  # Récupérer le nom
+
+            # Vérifier si la catégorie existe déjà
+            if not Categorie.objects.filter(nom=nom_categorie).exists():
+                Categorie.objects.create(nom=nom_categorie)  # Enregistrer la catégorie
+                return redirect('liste_categories')  # Rediriger vers la liste des catégories
+            else:
+                form.add_error('nom', 'Cette catégorie existe déjà.')  # Ajouter une erreur si elle existe déjà
         
     else:
         form = CategorieForm()
 
     return render(request, 'Catalogue/ajouter_categorie.html', {'form': form})
+

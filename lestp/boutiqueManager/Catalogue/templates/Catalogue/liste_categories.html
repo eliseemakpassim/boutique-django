@@ -1,0 +1,82 @@
+<style>
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.category-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.category-card {
+    width: 250px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+}
+
+.category-image {
+    background: #ddd;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.category-info h3 {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+.view-category {
+    display: inline-block;
+    padding: 8px 12px;
+    background: green;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.add-category {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    color: blue;
+}
+</style>
+
+{% extends 'base.html' %}
+
+{% block title %}Liste des Catégories - Miabé Boutique{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="title">Liste des Catégories</h1>
+        <div class="category-grid">
+            {% for categorie in categories %}
+                <div class="category-card">
+                    <div class="category-image">Image {{ categorie.nom }}</div>
+                    <div class="category-info">
+                        <h3>{{ categorie.nom }}</h3>
+                        <a href="#" class="view-category">Voir les produits</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <a href="{% url 'ajouter_categorie' %}" class="add-category">Ajouter une Catégorie</a>
+    </div>
+{% endblock %}
+
