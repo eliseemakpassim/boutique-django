@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .forms import ProduitForm, CategorieForm
 from .models import Produit, Categorie
 # Create your views here.
@@ -62,4 +62,58 @@ def ajouter_categorie(request):
         form = CategorieForm()
 
     return render(request, 'Catalogue/ajouter_categorie.html', {'form': form})
+
+#  Afficher les produits d'une catégorie
+def categorie_produits(request, id):
+    categorie = get_object_or_404(Categorie, id=id)
+    produits = Produit.objects.filter(categorie=categorie)
+    return render(request, 'Catalogue/produits_par_categorie.html', {'categorie': categorie, 'produits': produits})
+
+# methode  pour modifier un produit
+def modifier_produit(request, id):
+    produit = get_object_or_404(Produit, id=id)
+    if request.method == 'POST':
+        form = ProduitForm(request.POST, instance=produit)
+        if form.is_valid():
+            form.save()
+            # Rediriger vers la liste des produits
+            return redirect('liste_produits')  
+    else:
+        form = ProduitForm(instance=produit)
+    return render(request, 'Catalogue/modifier_produit.html', {'form': form, 'produit': produit})
+
+# methode pour modifier une categorie
+def modifier_categorie(request, id):
+    categorie = get_object_or_404(Categorie, id=id)
+
+    if request.method == "POST":
+        form = CategorieForm(request.POST, instance=categorie)
+        if form.is_valid():
+            form.save()  # Enregistre les modifications dans la base de données
+            return redirect('liste_categories')  # Redirige vers la liste des catégories
+    else:
+        form = CategorieForm(instance=categorie)
+
+    return render(request, 'Catalogue/modifier_categorie.html', {'form': form, 'categorie': categorie})
+
+#methode pour supprimer une categorie
+
+def supprimer_categorie(request, categorie_id):
+    categorie = get_object_or_404(Categorie, id=categorie_id)
+    if request.method == 'POST':
+        categorie.delete()
+        return redirect('liste_categories')  # redirige vers la liste des catégories
+    return render(request, 'Catalogue/supprimer_categorie.html', {'categorie': categorie})
+
+
+#methode pour supprimer un produit
+def supprimer_produit(request, produit_id):
+    produit = get_object_or_404(Produit, id=produit_id)
+    if request.method == 'POST':
+        produit.delete()
+        return redirect('liste_produits')  # Redirige vers la liste des produits
+    return render(request, 'Catalogue/supprimer_produit.html', {'produit': produit})
+
+
+
 

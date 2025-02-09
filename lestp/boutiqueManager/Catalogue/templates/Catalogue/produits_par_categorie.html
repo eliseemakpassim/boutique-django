@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Produits - {{ categorie.nom }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Produits de la catégorie {{ categorie.nom }}</h1>
+        <div class="products-grid">
+            {% for produit in produits %}
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ produit.image.url }}" alt="{{ produit.nom }}">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">{{ produit.nom }}</h3>
+                        <p class="product-price">{{ produit.prix }} XAOF</p>
+                        <button class="add-to-cart">Ajouter au panier</button>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Aucun produit trouvé dans cette catégorie.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

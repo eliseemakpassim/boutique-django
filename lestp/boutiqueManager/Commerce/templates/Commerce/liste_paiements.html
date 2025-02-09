@@ -1,0 +1,95 @@
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+        font-family: 'Arial', sans-serif;
+    }
+    
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 1em;
+        font-family: 'Arial', sans-serif;
+    }
+    
+    .table th, .table td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+    
+    .table thead th {
+        background-color: #007bff;
+        color: white;
+    }
+    
+    .table tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    
+    .table tbody tr:hover {
+        background-color: #e9f1ff;
+    }
+    
+    .add-category {
+        display: block;
+        margin: 20px 0;
+        text-align: center;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+    
+    .add-category:hover {
+        background-color: #0056b3;
+    }
+    
+</style>
+
+{% extends 'base.html' %}
+
+{% block title %}Liste des Paiements Mobile Money{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Liste des Paiements</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Montant</th>
+                    <th>Type de paiement</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for paiement in paiements %}
+                    <tr>
+                        <td>{{ paiement.date_payement }}</td>
+                        <td>{{ paiement.montant }} FCFA</td>
+                        <td>{{ paiement.get_type_paiement_display }}</td>
+                        <td>
+                            <a href="{% url 'Commerce:modifier_paiement' paiement.id %}" class="edit-category">Modifier</a>
+                            <a href="{% url 'Commerce:supprimer_paiement' paiement.id %}" class="delete-category">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'Commerce:ajouter_paiement' %}" class="add-category">Ajouter un payement</a>
+    </div>
+{% endblock %}

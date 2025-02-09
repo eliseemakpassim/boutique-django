@@ -1,3 +1,6 @@
+{% load static %}
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -154,12 +157,13 @@
 <body>
     <header>
         <nav>
-            <div class="logo">Ma Boutique</div>
+            <div class="logo">Mia bé Boutique</div>
             <div class="nav-links">
-                <a href="#accueil">Accueil</a>
-                <a href="#categories">Catégories</a>
-                <a href="#promos">Promotions</a>
-                <a href="#contact">Contact</a>
+                <a href="{% url 'liste_produits'%}">liste de vos produits</a>
+                <a href="{% url 'liste_categories'%}">les categories de vos  produits </a>
+                <a href="{% url 'Commerce:liste_paniers' %}">Liste de vos paniers</a>
+                <a href="{% url 'Commerce:liste_ventes' %}">Liste de vos ventes</a>
+                <a href="{% url 'Commerce:liste_paiements' %}">Liste de vos paiements</a>
                 <div class="cart-icon">
                     🛒
                     <span class="cart-count">0</span>
@@ -174,7 +178,7 @@
             <!-- Produit 1 -->
             <div class="product-card">
                 <div class="product-image">
-                    <img src="static/a.png" alt="Produit 1">
+                    <img src="{% static 'a.png' %}" alt="Produit 1">
                 </div>
                 <div class="product-info">
                     <h3 class="product-title">Produit 1</h3>
@@ -186,7 +190,7 @@
             <!-- Produit 2 -->
             <div class="product-card">
                 <div class="product-image">
-                   <img src="static/b.png" alt="Produit 2">
+                   <img src="{% static 'b.png' %}" alt="Produit 2">
                 </div>
                 <div class="product-info">
                     <h3 class="product-title">Produit 2</h3>
@@ -198,7 +202,7 @@
             <!-- Produit 3 -->
             <div class="product-card">
                 <div class="product-image">
-                    <img src="static/c.png" alt="Produit 3">
+                    <img src="{% static 'c.png' %}" alt="Produit 3">
                 </div>
                 <div class="product-info">
                     <h3 class="product-title">Produit 3</h3>

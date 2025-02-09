@@ -1,7 +1,68 @@
 <style>
-
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .category-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .category-table th, .category-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+    
+    .category-table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    
+    .category-image {
+        background: #ddd;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .view-category, .edit-category, .delete-category {
+        display: inline-block;
+        padding: 8px 12px;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin: 0 5px;
+    }
+    
+    .view-category {
+        background: green;
+    }
+    
+    .edit-category {
+        background: orange;
+    }
+    
+    .delete-category {
+        background: red;
+    }
+    
+    .add-category {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+        color: blue;
+    }
 </style>
-
 
 {% extends 'base.html' %}
 
@@ -9,14 +70,34 @@
 
 {% block content %}
     <div class="container">
-        <h1>Liste des Produits</h1>
-        <ul class="list-group">
-            {% for produit in produits %}
-                <li class="list-group-item">{{ produit.nom }} - {{ produit.prix }} FCFA</li>
-            {% empty %}
-                <li class="list-group-item">Aucun produit disponible.</li>
-            {% endfor %}
-        </ul>
-        <a href="{% url 'ajouter_produit' %}" class="btn btn-primary mt-3">Ajouter un Produit</a>
+        <h1 class="title">Liste des Produits</h1>
+        <table class="category-table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prix (FCFA)</th>
+                    <th>quantite</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produit in produits %}
+                    <tr>
+                        <td>{{ produit.nom }}</td>
+                        <td>{{ produit.prix }}</td>
+                        <td>{{ produit.quantite }}</td>
+                        <td>
+                            <a href="{% url 'modifier_produit' produit.id %}" class="edit-category">Modifier</a>
+                            <a href="{%url 'supprimer_produit' produit.id%}" class="delete-category">Supprimer</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">Aucun produit disponible.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'ajouter_produit' %}" class="btn btn-primary mt-3 add-category">Ajouter un Produit</a>
     </div>
 {% endblock %}

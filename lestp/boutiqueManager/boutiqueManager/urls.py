@@ -23,5 +23,6 @@ urlpatterns = [
     #urls de l'application Catalogue
     path('', lambda request: redirect('Catalogue/')),
     path('Catalogue/', include('Catalogue.urls')),
- 
+    #urls de l'application Commerce
+     path('Commerce/', include('Commerce.urls', namespace='Commerce')),
 ]

@@ -1,0 +1,68 @@
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    
+    h2 {
+        color: #333;
+    }
+    
+    p {
+        font-size: 18px;
+        color: #666;
+    }
+    
+    form {
+        margin-top: 20px;
+    }
+    
+    button {
+        background-color: #d9534f;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    button:hover {
+        background-color: #c9302c;
+    }
+    
+    a {
+        display: inline-block;
+        margin-top: 20px;
+        color: #5bc0de;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        text-decoration: underline;
+    }
+    </style>
+
+<h2>Êtes-vous sûr de vouloir supprimer cette catégorie ?</h2>
+<p>{{ categorie.nom }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Oui, supprimer</button>
+</form>
+<a href="{% url 'liste_categories' %}">Annuler</a>

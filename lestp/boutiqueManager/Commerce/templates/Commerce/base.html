@@ -65,11 +65,12 @@
         <nav>
             <div class="logo">Mia bé Boutique</div>
             <div class="nav-links">
-                <a href="{% url 'liste_produits'%}">liste de vos produits</a>
-                <a href="{% url 'liste_categories'%}">les categories de vos  produits </a>
-                <a href="{% url 'Commerce:liste_paniers' %}">Liste de vos paniers</a>
-                <a href="{% url 'Commerce:liste_ventes' %}">Liste de vos ventes</a>
-                <a href="{% url 'Commerce:liste_paiements' %}">Liste de vos paiements</a>
+                <a href="{% url 'Commerce:liste_produits'%}">liste de vos produits</a>
+                <a href="{% url 'Commerce:liste_categories'%}">les categories de vos  produits </a>
+                <a href="{% url 'liste_paniers' %}">Liste de vos paniers</a>
+                <a href="{% url 'liste_ventes' %}">Liste de vos ventes</a>
+                <a href="{% url 'liste_paiements' %}">Liste de vos paiements</a>
+                <div class="cart-icon">
                     🛒
                     <span class="cart-count">0</span>
                 </div>
